@@ -8,6 +8,7 @@ use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controller\HasMiddleware;
+use App\Models\Category;
 
 class ArticleController extends Controller implements HasMiddleware
 
@@ -16,7 +17,7 @@ class ArticleController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('auth', except: ['index', 'show']),
+            new Middleware('auth', except: ['index', 'show', 'byCategory', 'byUser']),
         ];
     }
     /**
@@ -24,7 +25,8 @@ class ArticleController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        //
+        $articles = Article::orderBy('created_at', 'desc')->get();
+        return view('article.index', compact('articles'));
     }
 
     /**
@@ -67,7 +69,7 @@ class ArticleController extends Controller implements HasMiddleware
      */
     public function show(Article $article)
     {
-        //
+        return view('article.show', compact('artcle'));
     }
 
     /**
@@ -92,5 +94,10 @@ class ArticleController extends Controller implements HasMiddleware
     public function destroy(Article $article)
     {
         //
+    }
+
+    public function byCategory(Category $category){
+        $articles = $category->articles()->orderBy('created_ar', 'desc')->get();
+        return view('article.by-category', compact ('category', 'articles'));
     }
 }
