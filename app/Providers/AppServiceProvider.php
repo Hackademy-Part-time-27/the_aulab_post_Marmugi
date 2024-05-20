@@ -5,7 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
 use Illuminate\Support\Facades\Schema;
-use Illumonate\Suppor\Facades\View;
+use App\Providers\AppServiceProvider;
+use App\Providers\FortifyServiceProvider;
+use Illuminate\Support\Facades\View;
+
 
 class AppServiceProvider extends ServiceProvider
 {
