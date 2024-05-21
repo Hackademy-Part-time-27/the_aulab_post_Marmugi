@@ -13,6 +13,12 @@
           <a class="nav-link active" aria-current="page" href="{{route('careers')}}">Lavora con noi</a>
         </li>
         @auth
+        @if (Auth::user()->is_revisor)
+          <li><a class="dropdown-item" href="{{route('revisor.dashboard')}}">Dashboard Revisor</a></li>
+        @endif
+        @if (Auth::user()->is_admin)
+          <li><a class="dropdown-item" href="{{route('admin.dashboard')}}">Dashboard Admin</a></li>
+        @endif
         <li class="nav-item">
           <a class="nav-link" href="{{route('article.create')}}">Inserisci un articolo</a>
         </li>
