@@ -17,7 +17,7 @@ class ArticleController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('auth', except: ['index', 'show', 'byCategory', 'byUser']),
+            new Middleware('auth', except: ['index', 'show', 'byCategory', 'byUser', 'articleSearch']),
         ];
     }
     /**
@@ -104,5 +104,12 @@ class ArticleController extends Controller implements HasMiddleware
     public function byUser(User $user){
         $articles = $user->articles()->where('is_accepted', true)->orderBy('created_at', 'desc')->get();
         return view('article.by-user', compact('user', 'articles'));
+    }
+
+    public function articleSearch(Request $request){
+        $query = $request->input('query');
+        $articles = Article::search($query)->where('is_accpted', true)->orderBy('created_at', 'desc')->get();
+        return view('article.search-index', compact('articles', 'query'));
+
     }
 }
