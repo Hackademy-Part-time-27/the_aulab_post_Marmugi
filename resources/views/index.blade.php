@@ -26,6 +26,18 @@
                     <p class="small text-muted">Categoria:
                         <a href="{{route('article.byCategory', $article->category)}}" class="text-capitalize text-muted">{{ $article->category->name }}</a>
                     </p>
+                    @if ($article->category)
+                    <p class="small text-muted">Categoria:
+                        <a href="{{route(article.byCategory', $article->category)}}" class="text-capitalize text-muted">{{ $article->category->name }}</a>
+                    </p>
+                @else
+                    <p class="small text-muted">Nessuna categoria</p>
+                @endif
+                <p class="small text-muted my-0">
+                    @foreach ($article->tags as $tag)
+                        #{{ $tag->name }}
+                    @endforeach
+                </p>
                 </div>
                 <div class="card-footer d-flex justify-content-between align-items-center">
                     <p>Redatto il {{$article->created_at->format('d/m/Y')}}<br>
