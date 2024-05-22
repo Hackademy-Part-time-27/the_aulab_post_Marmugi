@@ -41,6 +41,9 @@
         @guest
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Benvenuto Ospite</a>
+            @if (Auth::user()->is_writer)
+              <li><a class="dropdown-item" href="{{route('writer.dashboard')}}">Dashboard Writer</a></li>
+            @endif
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{route('register')}}">Registrati</a></li>
                 <li><a class="dropdown-item" href="{{route('login')}}">Accedi</a></li>

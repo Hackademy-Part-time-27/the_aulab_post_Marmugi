@@ -1,12 +1,4 @@
-<x-layout>
-    <div class="container-fluid p-5 bg-secondary-subtle text-center">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <h1 class="display-1">Bentornato, Revisore {{Auth::user()->name}}</h1>
-            </div>
-        </div>
-    </div>
-    <table class="table table-stripped table-hover">
+<table class="table table-stripped table-hover">
         <thead class="table dark">
             <tr>
                 <th scope="col">#</th>
@@ -32,8 +24,10 @@
                     </td>
                     <td>
                         <a href="{{route('article.show', $article)}}" class="btn btn-secondary">Leggi</a>
-                        <a href="#" class="btn btn-warning text-white">Modifica</a>
-                        <form action="#" method="#" class="d-inline">
+                        <a href="{{route('article.edit', $article)}}" class="btn btn-warning text-white">Modifica</a>
+                        <form action="{{route('article.destroy', $article)}}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
                             <button type="submit" class="btn btn-danger">Elimina</button>
                         </form>
                     </td>
@@ -65,9 +59,3 @@
             </div>
        </div>
     </div>
-    @if (session('message'))
-        <div class="alert alert-success">
-            {{ session('message')}}
-        </div>
-    @endif
-</x-layout>
