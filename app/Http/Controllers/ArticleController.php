@@ -10,6 +10,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controller\HasMiddleware;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller implements HasMiddleware
 
@@ -62,6 +63,7 @@ class ArticleController extends Controller implements HasMiddleware
             'image' => $request->file('image')->store('public/images'),
             'category_id' => $request->category,
             'user_id' => Auth::user()->id,
+            'slug' => Str::slug($request->title),
         ]);
 
         $tags = explode(',', $request->tags);
@@ -117,6 +119,7 @@ class ArticleController extends Controller implements HasMiddleware
             'subtitle' => $request->subtitle,
             'body' => $request->body,
             'category_id' => $request->category,
+            'slug' => Str::slug($request->title),
         ]);
 
         if($request->image){

@@ -56,3 +56,5 @@ Route::middleware('writer')->group(function(){
     Route::delete('/article/destroy/{article}', [ArticleController::class, 'destroy'])->name('article.destroy');
 
 Route::get('/article/search', [ArticleController::class, 'articleSearch'])->name('artile.search');
+
+Route::get('/article/show/{article:slug}', [ArticleController::class, 'show'])->name('article.show');
